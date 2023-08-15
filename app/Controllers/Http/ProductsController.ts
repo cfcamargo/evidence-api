@@ -20,7 +20,7 @@ export default class ProductsController {
   }
 
   public async show({ params }: HttpContextContract) {
-    const product = await Product.findOrFail(params.id)
+    const product = await Product.findByOrFail('system_id', params.id)
 
     product.clicks += 1
     await product.save()
@@ -29,9 +29,17 @@ export default class ProductsController {
   }
 
   public async update({ request, params }: HttpContextContract) {
-    const product = await Product.findOrFail(params.id)
+    const product = await Product.findByOrFail('system_id', params.id)
 
-    const data = request.only(['title', 'description', 'cover', 'quantity', 'price', 'clicks'])
+    const data = request.only([
+      'title',
+      'description',
+      'cover',
+      'quantity',
+      'price',
+      'clicks',
+      'category',
+    ])
 
     product.merge(data)
 
@@ -39,7 +47,7 @@ export default class ProductsController {
   }
 
   public async destroy({ params, response }: HttpContextContract) {
-    const product = await Product.findOrFail(params.id)
+    const product = await Product.findByOrFail('system_id', params.id)
 
     await product.delete()
 
