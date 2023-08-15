@@ -5,7 +5,7 @@ import { StoreValidator } from 'App/Validators/Products'
 export default class ProductsController {
   public async index({ request }: HttpContextContract) {
     const page = request.input('page', 1)
-    const perPage = 20
+    const perPage = request.input('perPage', 20)
 
     const products = await Product.query().paginate(page, perPage)
 
