@@ -20,6 +20,7 @@ export default class ProductsController {
       'cover',
       'systemId',
       'quantity',
+      'price',
     ])
 
     data.category === '' ? (data.category = 'generic') : ''

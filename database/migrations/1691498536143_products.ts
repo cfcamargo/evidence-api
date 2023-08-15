@@ -13,6 +13,8 @@ export default class extends BaseSchema {
       table.text('cover')
       table.integer('system_id').notNullable()
       table.integer('quantity').notNullable()
+      table.double('price').notNullable()
+      table.integer('clicks').defaultTo(0)
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })

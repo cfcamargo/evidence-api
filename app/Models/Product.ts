@@ -26,6 +26,12 @@ export default class Product extends BaseModel {
   @column()
   public quantity: number
 
+  @column()
+  public price: number
+
+  @column()
+  public clicks: number
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
