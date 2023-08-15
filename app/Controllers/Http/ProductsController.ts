@@ -1,5 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Product from 'App/Models/Product'
+import { StoreValidator } from 'App/Validators/Products'
 
 export default class ProductsController {
   public async index({ request }: HttpContextContract) {
@@ -12,19 +13,7 @@ export default class ProductsController {
   }
 
   public async store({ request }: HttpContextContract) {
-    const data = request.only([
-      'title',
-      'description',
-      'brand',
-      'category',
-      'cover',
-      'systemId',
-      'quantity',
-      'price',
-    ])
-
-    data.category === '' ? (data.category = 'generic') : ''
-
+    const data = await request.validate(StoreValidator)
     const product = await Product.create(data)
 
     return product
@@ -33,17 +22,20 @@ export default class ProductsController {
   public async show({ params }: HttpContextContract) {
     const product = await Product.findOrFail(params.id)
 
+    product.clicks += 1
+    await product.save()
+
     return product
   }
 
   public async update({ request, params }: HttpContextContract) {
     const product = await Product.findOrFail(params.id)
 
-    const data = request.only(['title', 'description', 'cover', 'quantity'])
+    const data = request.only(['title', 'description', 'cover', 'quantity', 'price', 'clicks'])
 
     product.merge(data)
 
-    product.save()
+    await product.save()
   }
 
   public async destroy({ params, response }: HttpContextContract) {
