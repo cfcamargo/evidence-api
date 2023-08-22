@@ -32,6 +32,9 @@ export default class Product extends BaseModel {
   @column()
   public clicks: number
 
+  @column()
+  public inactive: boolean
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

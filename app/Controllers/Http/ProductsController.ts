@@ -39,6 +39,7 @@ export default class ProductsController {
       'price',
       'clicks',
       'category',
+      'inactive',
     ])
 
     product.merge(data)
