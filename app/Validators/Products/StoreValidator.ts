@@ -13,6 +13,7 @@ export class StoreValidator {
     systemId: schema.number([rules.required()]),
     quantity: schema.number([rules.required()]),
     price: schema.number([rules.required()]),
+    inactive: schema.boolean(),
   })
 
   public messages: CustomMessages = {}
