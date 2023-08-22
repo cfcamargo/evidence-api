@@ -9,11 +9,11 @@ export class StoreValidator {
     description: schema.string({ trim: true }, [rules.required(), rules.minLength(3)]),
     brand: schema.string({ trim: true }, [rules.required()]),
     category: schema.string({ trim: true }, [rules.required()]),
-    cover: schema.string({ trim: true }),
+    cover: schema.string.optional({ trim: true }),
     systemId: schema.number([rules.required()]),
     quantity: schema.number([rules.required()]),
     price: schema.number([rules.required()]),
-    inactive: schema.boolean(),
+    inactive: schema.boolean.optional(),
   })
 
   public messages: CustomMessages = {}
