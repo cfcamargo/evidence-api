@@ -5,10 +5,10 @@ export class StoreValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
-    title: schema.string({ trim: true }, [rules.required(), rules.minLength(3)]),
-    description: schema.string({ trim: true }, [rules.required(), rules.minLength(3)]),
-    brand: schema.string({ trim: true }, [rules.required()]),
-    category: schema.string({ trim: true }, [rules.required()]),
+    title: schema.string({ trim: true }, [rules.required(), rules.minLength(2)]),
+    description: schema.string.optional({ trim: true }),
+    brand: schema.string.optional({ trim: true }),
+    category: schema.string.optional({ trim: true }),
     cover: schema.string.optional({ trim: true }),
     systemId: schema.number([rules.required()]),
     quantity: schema.number([rules.required()]),
