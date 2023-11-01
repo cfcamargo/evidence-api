@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.text('description').notNullable()
       table.string('brand')
       table.string('category').notNullable()
-      table.text('cover')
+      table.text('cover', 'longtext')
       table.integer('system_id').notNullable()
       table.integer('quantity').notNullable()
       table.double('price').notNullable()
