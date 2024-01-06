@@ -53,4 +53,9 @@ export default class ProductsController {
 
     return response.status(201).send({ message: 'Deleted successfully' })
   }
+
+  public async mostVisited() {
+    const products = await Product.query().orderBy('clicks', 'desc').limit(20)
+    return products
+  }
 }
